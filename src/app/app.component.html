@@ -1,0 +1,35 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">POKEDEX</span>
+    <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Pokemon" aria-label="Search" [(ngModel)]="filter" [ngModelOptions]="{standalone: true}">
+      <button class="btn btn-outline-success" type="submit" (click)="searchFilter()">Buscar</button>
+    </form>
+  </div>
+</nav>
+<br>
+<div class="container mt-0 ">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="col" *ngFor="let pokemon of filteredPokemonList; let i = index">
+      <div class="card shadow-sm" >
+        <div>
+          <p style="font-size:200%; text-align:center; padding-top: 20px;" ><b>{{pokemon.name}}</b> </p>
+        </div>
+        <img src="{{pokemonImgList[pokemon.id-1]}}" alt="">
+        <div class="card-body">
+          <p class="btn btn-light" disabled><b>{{pokemon.id}}</b> </p>
+          <br>
+          <span *ngFor="let stat of pokemon.stats; let i = index">
+            <span class="badge bg-primary rounded-pill">{{stat.stat.name}}: {{stat.base_stat}}</span>
+          </span>
+          <br>
+          <br>
+          <span *ngFor="let type of pokemon.types; let i = index">
+            <p class="btn btn-light" disabled style="color: white;" [ngStyle]="{'background-color': setColor(type.type.name)}"><b>{{type.type.name}}</b></p>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
